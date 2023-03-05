@@ -1,0 +1,45 @@
+name: Feature Request
+description: Make a new feature request
+title: '[Feature]: '
+labels: ['enhancement']
+assignees:
+    - VyrekXD
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Take seriously this feature request and search for duplicates before submitting a new one.
+    - type: textarea
+      id: feature-origin
+      attributes:
+          label: Is your feature related to a bug or a problem? If so, explain it.
+          description: Explain the problem or mention the bug using ex. "#1".
+      validations:
+          required: false
+    - type: textarea
+      id: wanted-solution
+      attributes:
+          label: Describe the solution you would want.
+          description: Explain the solution you would want to be implemented.
+      validations:
+          required: true
+    - type: textarea
+      id: alternatives
+      attributes:
+          label: Have you considered a alternative? If so, explain it.
+          description: Explain with details alternatives to your solution
+      validations:
+          required: false
+    - type: textarea
+      id: extra-data
+      attributes:
+          label: Extra Data
+          description: If you need to explain some more context put it on here.
+    - type: checkboxes
+      id: terms
+      attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/disgoorg/disgo/tree/main/CODE_OF_CONDUCT.md)
+      options:
+          - label: I agree to follow this project's Code of Conduct
+            required: true

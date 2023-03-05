@@ -1,0 +1,48 @@
+name: Bug Report
+description: Make a new bug report
+title: '[Bug]: '
+labels: ['bug']
+assignees:
+    - VyrekXD
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Please fill correctly the issue form.
+    - type: textarea
+      id: what-happened
+      attributes:
+          label: What happened?
+          description: Explain a basic description of what happened
+      validations:
+          required: true
+    - type: textarea
+      id: what-is-supposed
+      attributes:
+          label: What is supposed to happen?
+          description: Explain what you expected to happen.
+      validations:
+          required: true
+    - type: textarea
+      id: steps
+      attributes:
+          label: Describe the steps to reproduce
+          description: Explain with details the steps to reproduce
+      validations:
+          required: true
+    - type: input
+      id: version
+      attributes:
+          label: What version are you using?
+          description: You can see what version you are using on go.mod
+          placeholder: ex. 0.0.1
+      validations:
+          required: true
+    - type: checkboxes
+      id: terms
+      attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/disgoorg/disgo/tree/main/CODE_OF_CONDUCT.md)
+      options:
+          - label: I agree to follow this project's Code of Conduct
+            required: true
