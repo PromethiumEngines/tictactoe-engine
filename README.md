@@ -12,7 +12,7 @@
 
 <h2>Installation</h2>
 
-You can install the go package with this command in your proyect
+You can install the go package with this command in your project.
 
 ```
 go get github.com/PromethiumEngines/tictactoe-engine
