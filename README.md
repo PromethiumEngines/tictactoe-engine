@@ -19,7 +19,7 @@ go get github.com/PromethiumEngines/tictactoe-engine
 ```
 
 <h2>Documentation</h2>
-The documentation and settings of this engine can be found on the [go reference](https://pkg.go.dev/github.com/PromethiumEngines/tictactoe-engine)
+The documentation and settings of this engine can be found on the go reference
 
 <h2>Usage</h2>
 
@@ -36,7 +36,7 @@ import (
 // Here we create a new game of tictactoe.
 tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 if err != nil {
-    // An error could occur if the settings are invalid 
+    // An error could occur if the settings are invalid
     panic(err)
 }
 
