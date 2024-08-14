@@ -1,3 +1,3 @@
-module github.com/PromethiumEngines/tictactoe-engine/v2.0.2
+module github.com/PromethiumEngines/tictactoe-engine
 
 go 1.23
