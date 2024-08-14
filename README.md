@@ -6,16 +6,16 @@
 [![TicTacToe-Engine Version](https://img.shields.io/github/v/tag/PromethiumEngines/tictactoe-engine?label=release)](https://github.com/PromethiumEngines/tictactoe-engine/)
 [![License](https://img.shields.io/github/license/PromethiumEngines/tictactoe-engine)](https://www.apache.org/licenses/LICENSE-2.0)
 
-<h1></h1>
+<h1>New version! v2</h1>
 
-<h2 align="center">Highly configurable tictactoe engine</h2>
+<h2 align="center">v2 Highly configurable tictactoe engine</h2>
 
 <h2>Installation</h2>
 
 You can install the go package with this command in your project.
 
 ```
-go get github.com/PromethiumEngines/tictactoe-engine
+go get github.com/PromethiumEngines/tictactoe-engine/v2
 ```
 
 <h2>Documentation</h2>
