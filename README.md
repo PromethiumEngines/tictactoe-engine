@@ -5,11 +5,10 @@
 [![Go Version](https://img.shields.io/github/go-mod/go-version/PromethiumEngines/tictactoe-engine)](https://golang.org/doc/devel/release.html)
 [![TicTacToe-Engine Version](https://img.shields.io/github/v/tag/PromethiumEngines/tictactoe-engine?label=release)](https://github.com/PromethiumEngines/tictactoe-engine/)
 [![License](https://img.shields.io/github/license/PromethiumEngines/tictactoe-engine)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Discord](https://discord.com/api/guilds/761370919419117598/widget.png)](https://discord.gg/g3ZbCmShD4)
 
 <h1></h1>
 
-<h2 align="center">An engine to simulate a game of tictactoe highly configurable made by <b>PromethiumEngines</b></h2>
+<h2 align="center">Highly configurable tictactoe engine</h2>
 
 <h2>Installation</h2>
 
@@ -19,9 +18,12 @@ You can install the go package with this command in your project.
 go get github.com/PromethiumEngines/tictactoe-engine
 ```
 
+<h2>Documentation</h2>
+The documentation and settings of this engine can be found on the [go reference](https://pkg.go.dev/github.com/PromethiumEngines/tictactoe-engine)
+
 <h2>Usage</h2>
 
-This engine is easy to use:
+This is just an example of how to run a game of tictactoe using the engine, all of this settings can be changed
 
 ```go
 package main
@@ -32,8 +34,7 @@ import (
 )
 
 // Here we create a new game of tictactoe.
-// (All this settings can be changed)
-tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Weight: 3})
+tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 if err != nil {
     // An error could occur if the settings are invalid 
     panic(err)
@@ -50,11 +51,9 @@ tttGame.OnDraw(func (g *Game) {
 	log.Printf(`It seems the match ended in a draw in "%v" turns`, g.Turn)
 })
 
-// You can start adding moves here
-// If your map is 3x3 it means the max-tiles are 9,
-// but we start from 0 so be carefully where you put your symbol!
+// For simplicity in adding moves the engine uses the x and y coordinates.
 tttGame.AddMove(0, 0)
 
 tttGame.AddMove(0, 1)
-// The game will end when the engine detects a win or a draw.
+// The game will end when the engine detects a win or a draw emitting the correct event.
 ```

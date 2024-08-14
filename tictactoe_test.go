@@ -6,12 +6,12 @@ import (
 	"time"
 )
 
-// Test3x3<>Match calls tictactoe.New() with the default options of ToWin 3,
+// Test3x3HorizontalMatch calls tictactoe.New() with the default options of ToWin 3,
 // Height 3, Weight 3 for a valid return value, 0 should win in horizontal,
 // vertical and 1 should win in diagonal.
 func Test3x3HorizontalMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Weight: 3})
+	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 	if err != nil {
 		t.Fatalf(
 			"New(), options are invalid, horizontal match, %v, want valid GameOptions",
@@ -33,22 +33,22 @@ func Test3x3HorizontalMatch(t *testing.T) {
 	})
 
 	// X turn
-	tttGame.AddMove(0, 0)
+	tttGame.AddMove(0, 0, 0)
 
 	// O turn
-	tttGame.AddMove(1, 3)
+	tttGame.AddMove(1, 0, 1)
 
-	tttGame.AddMove(0, 1)
+	tttGame.AddMove(0, 1, 0)
 
-	tttGame.AddMove(1, 4)
+	tttGame.AddMove(1, 1, 1)
 
 	// Here X should win
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(0, 2, 0)
 }
 
 func Test3x3VerticalMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Weight: 3})
+	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 	if err != nil {
 		t.Fatalf(
 			"New(), options are invalid, vertical match, %v, want valid GameOptions",
@@ -70,22 +70,22 @@ func Test3x3VerticalMatch(t *testing.T) {
 	})
 
 	// X turn
-	tttGame.AddMove(0, 0)
+	tttGame.AddMove(0, 0, 0)
 
 	// O turn
-	tttGame.AddMove(1, 1)
+	tttGame.AddMove(1, 1, 0)
 
-	tttGame.AddMove(0, 3)
+	tttGame.AddMove(0, 0, 1)
 
-	tttGame.AddMove(1, 2)
+	tttGame.AddMove(1, 1, 1)
 
 	// Here X should win
-	tttGame.AddMove(0, 6)
+	tttGame.AddMove(0, 0, 2)
 }
 
 func Test3x3DiagonalDecreasingMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Weight: 3})
+	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 	if err != nil {
 		t.Fatalf(
 			"New(), options are invalid, diagonal left to right match, %v, want valid GameOptions",
@@ -110,22 +110,22 @@ func Test3x3DiagonalDecreasingMatch(t *testing.T) {
 	})
 
 	// O turn
-	tttGame.AddMove(1, 0)
+	tttGame.AddMove(1, 0, 0)
 
 	// X turn
-	tttGame.AddMove(0, 1)
+	tttGame.AddMove(0, 0, 1)
 
-	tttGame.AddMove(1, 4)
+	tttGame.AddMove(1, 1, 1)
 
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(0, 0, 2)
 
 	// Here O should win
-	tttGame.AddMove(1, 8)
+	tttGame.AddMove(1, 2, 2)
 }
 
 func Test3x3DiagonalIncreasingMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Weight: 3})
+	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 	if err != nil {
 		t.Fatalf(
 			"New(), options are invalid, diagonal right to left match, %v, want valid GameOptions",
@@ -150,22 +150,22 @@ func Test3x3DiagonalIncreasingMatch(t *testing.T) {
 	})
 
 	// X turn
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(0, 2, 0)
 
 	// 0 turn
-	tttGame.AddMove(1, 0)
+	tttGame.AddMove(1, 2, 1)
 
-	tttGame.AddMove(0, 4)
+	tttGame.AddMove(0, 1, 1)
 
-	tttGame.AddMove(1, 1)
+	tttGame.AddMove(1, 2, 2)
 
 	// Here O should win
-	tttGame.AddMove(0, 6)
+	tttGame.AddMove(0, 0, 2)
 }
 
 func Test3x3DrawMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Weight: 3})
+	tttGame, err := New(&GameOptions{ToWin: 3, Height: 3, Width: 3})
 	if err != nil {
 		t.Fatalf(
 			"New(), options are invalid, diagonal match, %v, want valid GameOptions",
@@ -183,36 +183,36 @@ func Test3x3DrawMatch(t *testing.T) {
 
 	tttGame.OnDraw(func(g *Game) {
 		log.Printf(
-			`Draw game concluded correctly, in "%v" turns. (In %v)`,
+			`Draw game concluded, in "%v" turns. (In %v)`,
 			g.Turn,
 			time.Since(start),
 		)
 	})
 
 	// X turn
-	tttGame.AddMove(0, 0)
+	tttGame.AddMove(0, 0, 0)
 
 	// O turn
-	tttGame.AddMove(1, 1)
+	tttGame.AddMove(1, 0, 1)
 
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(0, 0, 2)
 
-	tttGame.AddMove(1, 4)
+	tttGame.AddMove(1, 1, 1)
 
-	tttGame.AddMove(0, 3)
+	tttGame.AddMove(0, 1, 0)
 
-	tttGame.AddMove(1, 5)
+	tttGame.AddMove(1, 2, 2)
 
-	tttGame.AddMove(0, 7)
+	tttGame.AddMove(0, 1, 2)
 
-	tttGame.AddMove(1, 6)
+	tttGame.AddMove(1, 2, 0)
 
-	tttGame.AddMove(0, 8)
+	tttGame.AddMove(0, 2, 1)
 }
 
 func Test5x4HorizontalMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Weight: 5})
+	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Width: 5})
 	if err != nil {
 		t.Fatalf(
 			"New(), options are invalid, horizontal 5x4 match, %v, want valid GameOptions",
@@ -237,29 +237,29 @@ func Test5x4HorizontalMatch(t *testing.T) {
 	})
 
 	// X turn
-	tttGame.AddMove(0, 0)
+	tttGame.AddMove(0, 0, 0)
 
 	// O turn
-	tttGame.AddMove(1, 5)
+	tttGame.AddMove(1, 0, 1)
 
-	tttGame.AddMove(0, 1)
+	tttGame.AddMove(0, 1, 0)
 
-	tttGame.AddMove(1, 6)
+	tttGame.AddMove(1, 0, 2)
 
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(0, 2, 0)
 
-	tttGame.AddMove(1, 7)
+	tttGame.AddMove(1, 0, 3)
 
 	// Here X should win
-	tttGame.AddMove(0, 3)
+	tttGame.AddMove(0, 3, 0)
 }
 
 func Test5x4VerticalMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Weight: 5})
+	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Width: 5})
 	if err != nil {
 		t.Fatalf(
-			"New(), options are invalid, horizontal 5x4 match, %v, want valid GameOptions",
+			"New(), options are invalid, vertical 5x4 match, %v, want valid GameOptions",
 			err,
 		)
 	}
@@ -281,36 +281,36 @@ func Test5x4VerticalMatch(t *testing.T) {
 	})
 
 	// X turn
-	tttGame.AddMove(0, 0)
+	tttGame.AddMove(0, 0, 0)
 
 	// O turn
-	tttGame.AddMove(1, 1)
+	tttGame.AddMove(1, 1, 0)
 
-	tttGame.AddMove(0, 5)
+	tttGame.AddMove(0, 0, 1)
 
-	tttGame.AddMove(1, 2)
+	tttGame.AddMove(1, 1, 1)
 
-	tttGame.AddMove(0, 10)
+	tttGame.AddMove(0, 0, 2)
 
-	tttGame.AddMove(1, 3)
+	tttGame.AddMove(1, 1, 2)
 
 	// Here X should win
-	tttGame.AddMove(0, 15)
+	tttGame.AddMove(0, 0, 3)
 }
 
 func Test5x4DiagonalDecreasingMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Weight: 5})
+	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Width: 5})
 	if err != nil {
 		t.Fatalf(
-			"New(), options are invalid, horizontal 5x4 match, %v, want valid GameOptions",
+			"New(), options are invalid, diagonal 5x4 left to right match, %v, want valid GameOptions",
 			err,
 		)
 	}
 
 	tttGame.OnWinner(func(g *Game) {
 		log.Printf(
-			`Diagonal 5x4 game concluded, "%v" wins, "%v" turns. (In %v)`,
+			`Diagonal 5x4 left to right game concluded, "%v" wins, "%v" turns. (In %v)`,
 			*g.Winner,
 			g.Turn,
 			time.Since(start),
@@ -319,42 +319,42 @@ func Test5x4DiagonalDecreasingMatch(t *testing.T) {
 
 	tttGame.OnDraw(func(g *Game) {
 		t.Fatalf(
-			`Diagonal 5x4 game concluded as a draw, in "%v" turns.`,
+			`Diagonal 5x4 left to right game concluded as a draw, in "%v" turns.`,
 			g.Turn,
 		)
 	})
 
 	// O turn
-	tttGame.AddMove(1, 0)
+	tttGame.AddMove(1, 0, 0)
 
 	// X turn
-	tttGame.AddMove(0, 1)
+	tttGame.AddMove(0, 1, 0)
 
-	tttGame.AddMove(1, 6)
+	tttGame.AddMove(1, 1, 1)
 
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(0, 1, 2)
 
-	tttGame.AddMove(1, 12)
+	tttGame.AddMove(1, 2, 2)
 
-	tttGame.AddMove(0, 3)
+	tttGame.AddMove(0, 2, 3)
 
 	// Here O should win
-	tttGame.AddMove(1, 18)
+	tttGame.AddMove(1, 3, 3)
 }
 
 func Test5x4DiagonalIncreasingMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Weight: 5})
+	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Width: 5})
 	if err != nil {
 		t.Fatalf(
-			"New(), options are invalid, horizontal 5x4 match, %v, want valid GameOptions",
+			"New(), options are invalid, diagonal 5x4 right to left match, %v, want valid GameOptions",
 			err,
 		)
 	}
 
 	tttGame.OnWinner(func(g *Game) {
 		log.Printf(
-			`Diagonal 5x4 game concluded, "%v" wins, "%v" turns. (In %v)`,
+			`Diagonal 5x4 right to left game concluded, "%v" wins, "%v" turns. (In %v)`,
 			*g.Winner,
 			g.Turn,
 			time.Since(start),
@@ -363,35 +363,35 @@ func Test5x4DiagonalIncreasingMatch(t *testing.T) {
 
 	tttGame.OnDraw(func(g *Game) {
 		t.Fatalf(
-			`Diagonal 5x4 game concluded as a draw, in "%v" turns.`,
+			`Diagonal 5x4 right to left game concluded as a draw, in "%v" turns.`,
 			g.Turn,
 		)
 	})
 
 	// X turn
-	tttGame.AddMove(0, 3)
+	tttGame.AddMove(0, 4, 0)
 
 	// O turn
-	tttGame.AddMove(1, 0)
+	tttGame.AddMove(1, 0, 1)
 
-	tttGame.AddMove(0, 7)
+	tttGame.AddMove(0, 3, 1)
 
-	tttGame.AddMove(1, 1)
+	tttGame.AddMove(1, 0, 2)
 
-	tttGame.AddMove(0, 11)
+	tttGame.AddMove(0, 2, 2)
 
-	tttGame.AddMove(1, 2)
+	tttGame.AddMove(1, 1, 3)
 
 	// Here O should win
-	tttGame.AddMove(0, 15)
+	tttGame.AddMove(0, 1, 3)
 }
 
 func Test5x4DrawMatch(t *testing.T) {
 	start := time.Now()
-	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Weight: 5})
+	tttGame, err := New(&GameOptions{ToWin: 4, Height: 4, Width: 5})
 	if err != nil {
 		t.Fatalf(
-			"New(), options are invalid, horizontal 5x4 match, %v, want valid GameOptions",
+			"New(), options are invalid, draw 5x4 match, %v, want valid GameOptions",
 			err,
 		)
 	}
@@ -406,54 +406,41 @@ func Test5x4DrawMatch(t *testing.T) {
 
 	tttGame.OnDraw(func(g *Game) {
 		log.Printf(
-			`Draw 5x4 game concluded correctly, in "%v" turns. (In %v)`,
+			`Draw 5x4 game concluded, in "%v" turns. (In %v)`,
 			g.Turn,
 			time.Since(start),
 		)
 	})
 
 	// X turn
-	tttGame.AddMove(0, 0)
+	tttGame.AddMove(0, 0, 0)
+	tttGame.AddMove(0, 0, 1)
+
+	tttGame.AddMove(0, 1, 2)
+	tttGame.AddMove(0, 1, 3)
+
+	tttGame.AddMove(0, 2, 0)
+	tttGame.AddMove(0, 2, 1)
+
+	tttGame.AddMove(0, 3, 2)
+	tttGame.AddMove(0, 3, 3)
+
+	tttGame.AddMove(0, 4, 0)
+	tttGame.AddMove(0, 4, 1)
 
 	// O turn
-	tttGame.AddMove(1, 1)
+	tttGame.AddMove(1, 0, 2)
+	tttGame.AddMove(1, 0, 3)
 
-	tttGame.AddMove(0, 2)
+	tttGame.AddMove(1, 1, 0)
+	tttGame.AddMove(1, 1, 1)
 
-	tttGame.AddMove(1, 3)
+	tttGame.AddMove(1, 2, 2)
+	tttGame.AddMove(1, 2, 3)
 
-	tttGame.AddMove(0, 4)
-
-	tttGame.AddMove(1, 5)
-
-	tttGame.AddMove(0, 6)
-
-	tttGame.AddMove(1, 7)
-
-	tttGame.AddMove(0, 8)
-
-	tttGame.AddMove(1, 9)
-
-	tttGame.AddMove(0, 11)
-
-	tttGame.AddMove(1, 10)
-
-	tttGame.AddMove(0, 13)
-
-	tttGame.AddMove(1, 12)
-
-	tttGame.AddMove(0, 15)
-
-	tttGame.AddMove(1, 14)
-
-	tttGame.AddMove(0, 15)
-
-	tttGame.AddMove(1, 16)
-
-	tttGame.AddMove(0, 17)
-
-	tttGame.AddMove(1, 18)
-
+	tttGame.AddMove(1, 3, 0)
+	tttGame.AddMove(1, 3, 1)
+	tttGame.AddMove(1, 4, 2)
 	// The match will end as draw here
-	tttGame.AddMove(0, 19)
+	tttGame.AddMove(1, 4, 3)
 }
